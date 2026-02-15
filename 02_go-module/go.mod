@@ -1,3 +1,3 @@
-module go_module
+module greetings
 
 go 1.25.7
