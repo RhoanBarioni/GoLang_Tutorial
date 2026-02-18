@@ -1,7 +1,13 @@
-mod go init NAME
+go mod init NAME
 
     Fazer isso, tu vai criar o go.mod com o nome fornecido no NAME. Se for criar módulos ou serviços para o main
-    
+    Pode usar sites para importar os modules -> example.com/greetings
+
+
+go mod tidy
+
+    Go vai buscar possiveis packages faltantando e vai resolver dando import no go.mod é como um fix this shit
+
 
 VAR :=
 
@@ -20,10 +26,19 @@ VAR :=
     = atribui apenas (atualiza uma variável existente).
 
 
+Diferença entre Println e Sprintln
+
+    Println já mostra logo de cara no console, enquanto o Sprintln tu vai ter que declarar um var recebendo o valor dela
+    e usar o Println para mostrar esse Sprintln
+
+    O Sprintln armazena o valor na memória e faz formatação de string
+
+
 fmt.Sprintf("Hi, %v. Welcome!", VAR)
 
     Vai printar no console um texto + a variavél declarada após e vírgula.
     Usar o %v é como usar um := ele vai pegar o tipo da var automaticamente
+    Usar o \n para dar a quebra de linha
 
 
     1. Os Mais Usados
@@ -63,6 +78,16 @@ fmt.Sprintf("Hi, %v. Welcome!", VAR)
         %t: Para booleanos (true ou false).
 
         %p: Para endereços de memória (ponteiros).
+        
+
+import
+
+    o padrão é usar apenar import "NOME"
+    porém se for usar outras libs, usar com 
+    import(
+        "NOME1"
+        "NOME2"
+    )
 
 
 return formats[rand.Intn(len(formats))]
