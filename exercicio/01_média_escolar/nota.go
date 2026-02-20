@@ -6,5 +6,5 @@ import (
 )
 
 func main(){
-	fmt.Println(mediaschool.Calc(1.5, 1.2, 0, 5))
+	fmt.Println(mediaschool.Calc(10, 10, 10, 5, 10))
 }
