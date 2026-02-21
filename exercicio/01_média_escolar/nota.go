@@ -1,11 +1,11 @@
 package main
 
 import (
+	mediaschool "calc"
 	"fmt"
-	"calc"
 )
 
-func main(){
+func main() {
 	var nota1, nota2, nota3, nota4, nota5 float64
 	fmt.Println("Primeira Nota: ")
 	fmt.Scanln(&nota1)
