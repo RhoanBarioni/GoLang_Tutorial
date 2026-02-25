@@ -113,3 +113,10 @@ slice
     []float64
 
     é praticamente um array
+
+
+fmt.Scan
+
+    usar ele pra captar o valor inserido no console
+
+    fmt.Scan(&VAR)

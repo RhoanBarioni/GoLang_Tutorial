@@ -4,8 +4,8 @@ import (
 	"fmt"
 )
 
-func Calc(notas float64) float64 {
-	mediaNota := notas / 5
+func Calc(notas []float64, soma float64) (float64) {
+	mediaNota := soma / float64(len(notas))
 
 	if mediaNota > 7 {
 		fmt.Println("Passou de ano, boa")

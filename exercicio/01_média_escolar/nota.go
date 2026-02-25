@@ -6,19 +6,22 @@ import (
 )
 
 func main() {
-	var nota1, nota2, nota3, nota4, nota5 float64
-	fmt.Println("Primeira Nota: ")
-	fmt.Scanln(&nota1)
-	fmt.Println("Segunda Nota: ")
-	fmt.Scanln(&nota2)
-	fmt.Println("Terceira Nota: ")
-	fmt.Scanln(&nota3)
-	fmt.Println("Quarta Nota: ")
-	fmt.Scanln(&nota4)
-	fmt.Println("Quinta Nota: ")
-	fmt.Scanln(&nota5)
+	var nota float64
+	var notas []float64
+	var soma float64
 
-	notas := nota1 + nota2 + nota3 + nota4 + nota5
+	for{
+		fmt.Println("Para encerrar a adição das notas, colocar -1")
+		fmt.Print("Nota: ")
+		fmt.Scan(&nota)
 
-	fmt.Println(mediaschool.Calc(notas))
+		if (nota == -1){
+			break
+		}
+
+		notas = append(notas, nota)
+		soma += nota
+	}
+
+	fmt.Println(mediaschool.Calc(notas, soma))
 }
