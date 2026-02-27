@@ -4,15 +4,15 @@ import (
 	"fmt"
 )
 
-func Calc(notas []float64, soma float64) (float64) {
+func Calc(nome string, notas []float64, soma float64) (float64) {
 	mediaNota := soma / float64(len(notas))
 
 	if mediaNota > 7 {
-		fmt.Println("Passou de ano, boa")
+		fmt.Printf("O %v passou de ano \n", nome)
 	} else if mediaNota <= 7 && mediaNota >= 5 {
-		fmt.Println("Tá de recuperação, zé")
+		fmt.Printf("O %v tá de recuperação \n", nome)
 	} else{
-		fmt.Println("Não tem jeito, repetiu")
+		fmt.Printf("Não tem jeito %v repetiu \n", nome)
 	}
 	return mediaNota
 }

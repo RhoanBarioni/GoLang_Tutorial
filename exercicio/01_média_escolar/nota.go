@@ -9,6 +9,10 @@ func main() {
 	var nota float64
 	var notas []float64
 	var soma float64
+	var nome string
+
+	fmt.Println("Digite o nome do aluno")
+	fmt.Scan(&nome)
 
 	for{
 		fmt.Println("Para encerrar a adição das notas, colocar -1")
@@ -23,5 +27,5 @@ func main() {
 		soma += nota
 	}
 
-	fmt.Println(mediaschool.Calc(notas, soma))
+	fmt.Println(mediaschool.Calc(nome, notas, soma))
 }
