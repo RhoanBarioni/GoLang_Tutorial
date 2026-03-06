@@ -4,7 +4,11 @@ import (
 	"fmt"
 )
 
-func Calc(nome string, notas []float64, soma float64) (float64) {
+func Calc(nome string, notas []float64) (float64) {
+	var soma float64
+	for i := 0; i < len(notas); i++{
+		soma += notas[i]
+	}
 	mediaNota := soma / float64(len(notas))
 
 	if mediaNota > 7 {
