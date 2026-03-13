@@ -1,8 +1,4 @@
-{
-  "name":[
-    {
-        "Daniel": 5.5,
-        "Bruno": 10
-    }
-  ]
-}
+[
+  "daniel: 5.5",
+  "bruno: 10"
+]

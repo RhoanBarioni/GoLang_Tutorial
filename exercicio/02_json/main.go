@@ -1,4 +1,4 @@
-package main
+package json
 
 import (
 	"encoding/json"
@@ -12,7 +12,7 @@ type Student struct {
 	Name []map[string]float64 `json:"name"`
 }
 
-func main() {
+func Json() {
 	file, err := os.Open("dados.json")
 
 	if err != nil {
