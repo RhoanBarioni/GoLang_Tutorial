@@ -16,10 +16,14 @@ func main() {
 		log.Fatal(err)
 	}
 
+	fmt.Println(file)
+
 	defer file.Close() // pede para o go finalizar a função/tarefa depois que tudo for feito
 
 	byteValue, err := io.ReadAll(file) // vai dar um get e organizar tudo em []bytes (slice em byte)
 	// essa função percorre o json
+
+	fmt.Println(byteValue)
 
 	if err != nil {
 		log.Fatal(err)
