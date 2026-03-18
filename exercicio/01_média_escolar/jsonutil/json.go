@@ -1,4 +1,4 @@
-package main
+package jsonutil
 
 import (
 	"encoding/json"
@@ -8,9 +8,9 @@ import (
 	"os"
 )
 
-func main() {
+func Json() {
 
-	file, err := os.Open("dados.json") // ele abre o arquivo e fica lendo ela
+	file, err := os.Open("jsonutil/dados.json") // ele abre o arquivo e fica lendo ela
 
 	if err != nil {
 		log.Fatal(err)
@@ -29,7 +29,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var student []string // criar var para que ele receba todo o json em forma de array
+
+	type Aluno struct {
+		Nome  string  `json:"nome"`
+		Nota float64 `json:"nota"`
+	}
+
+	var student []Aluno // criar var para que ele receba todo o json em forma de array
 	err = json.Unmarshal(byteValue, &student) // faz o err pegar a função pq a função vai sempre tentar retornar um erro, então fica mais fácil e clean deixar assim
 	fmt.Println(student)
 
@@ -38,6 +44,8 @@ func main() {
 	}
 
 	for _, aluno := range student {
-		fmt.Println(aluno)
+		fmt.Println("Nome: ", aluno.Nome)
+		fmt.Println("Nota: ", aluno.Nota)
+		fmt.Println("________________")
 	}
 }

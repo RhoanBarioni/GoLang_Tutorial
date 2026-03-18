@@ -2,6 +2,7 @@ package main
 
 import (
 	mediaschool "calc"
+	jsonutil "jsonutil"
 	"fmt"
 )
 
@@ -11,13 +12,16 @@ type Aluno struct {
 }
 
 func main() {
+	jsonutil.Json()
+
 	var alunos []Aluno
 	var nota float64
 	// var notas []float64
 	// var soma float64
 	// var nome string
 
-	// pegar o aluno e notas e jogar num array
+	// pegar o aluno e notas e jogar num arr
+	// ay
 
 	for {
 		var aluno Aluno
