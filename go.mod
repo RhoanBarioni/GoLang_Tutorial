@@ -2,11 +2,11 @@ module escola
 
 go 1.25.8
 
-replace calc => ./internal/media_school
+// replace calc => ./internal/model/calc.go
 
-replace jsonutil => ./internal/jsonutil
+// replace jsonutil => ./internal/model/json.go
 
-require (
-	calc v0.0.0-00010101000000-000000000000
-	jsonutil v0.0.0-00010101000000-000000000000
-)
+// // require (
+// // 	calc v0.0.0-00010101000000-000000000000
+// // 	jsonutil v0.0.0-00010101000000-000000000000
+// // )

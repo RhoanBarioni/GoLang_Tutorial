@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/RhoanBarioni/GoLang_Tutorial/models"
 	mediaschool "calc"
 	"fmt"
 	jsonutil "jsonutil"
