@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/RhoanBarioni/GoLang_Tutorial/internal/service"
-	"github.com/RhoanBarioni/GoLang_Tutorial/internal/utils"
+	"github.com/RhoanBarioni/GoLang_Tutorial/internal/jsonutil"
 	"fmt"
 )
 
@@ -12,7 +12,7 @@ type Aluno struct {
 }
 
 func main() {
-	json.Json()
+	jsonutil.Json()
 
 	var alunos []Aluno
 	var nota float64
@@ -57,7 +57,7 @@ func main() {
 
 	for i := 0; i < len(alunos); i++ {
 		fmt.Println(alunos[i])
-		mediaschool.Calc(alunos[i].Nome, alunos[i].Notas)
+		service.Calc(alunos[i].Nome, alunos[i].Notas)
 	}
 	// for i := 0; i < len(alunos); i++{
 	// 	fmt.Println(alunos[i].Notas)

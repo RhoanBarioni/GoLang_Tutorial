@@ -1,4 +1,4 @@
-package utils
+package jsonutil
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ import (
 
 func Json() {
 
-	file, err := os.Open("pkg/jsonutil/dados.json") // ele abre o arquivo e fica lendo ela
+	file, err := os.Open("data/dados.json") // ele abre o arquivo e fica lendo ela
 
 	if err != nil {
 		log.Fatal(err)
@@ -44,8 +44,7 @@ func Json() {
 	}
 
 	for _, aluno := range student {
-		fmt.Println("Nome: ", aluno.Nome)
-		fmt.Println("Nota: ", aluno.Nota)
-		fmt.Println("________________")
+		fmt.Printf("Nome: %v \nNota: %v\n", aluno.Nome, aluno.Nota)
+		fmt.Println("------------------")
 	}
 }
