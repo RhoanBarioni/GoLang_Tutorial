@@ -10,7 +10,7 @@ import (
 
 func Json() {
 
-	file, err := os.Open("jsonutil/dados.json") // ele abre o arquivo e fica lendo ela
+	file, err := os.Open("pkg/jsonutil/dados.json") // ele abre o arquivo e fica lendo ela
 
 	if err != nil {
 		log.Fatal(err)

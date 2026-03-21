@@ -2,8 +2,8 @@ package main
 
 import (
 	mediaschool "calc"
-	jsonutil "jsonutil"
 	"fmt"
+	jsonutil "jsonutil"
 )
 
 type Aluno struct {
