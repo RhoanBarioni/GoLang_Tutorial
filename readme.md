@@ -1,219 +1,276 @@
-Estrutura de Projeto em Go
+# 📌 Estrutura de Projeto em Go
 
-Conceitos principais
-Package (pacote): cada pasta é um pacote
-main.go: ponto de entrada da aplicação
-go.mod: define o módulo do projeto
-Separação de responsabilidades: cada parte do código tem um papel claro
+## 🧠 Conceitos principais
 
-🗂️ Estrutura recomendada
+- **Package (pacote):** cada pasta é um pacote  
+- **main.go:** ponto de entrada da aplicação  
+- **go.mod:** define o módulo do projeto  
+- **Separação de responsabilidades:** cada parte do código tem um papel claro  
 
+---
+
+## 🗂️ Estrutura recomendada
+
+```text
 meu-projeto/
 ├── go.mod
 ├── cmd/
 │   └── app/
 │       └── main.go
+│
 ├── internal/
-│   ├── models/  structs e classes dentro do sistema
-│   ├── service/ coisas q o sistema faz
-│   └── utils/ validações e codigo reutilizaveis ou ferramentas auxiliar
+│   ├── models/   → estruturas de dados (structs)
+│   ├── service/  → regras de negócio (o que o sistema faz)
+│   └── utils/    → funções auxiliares e validações
+````
 
+---
 
-    UTILS
-        Ferramentas, função auxiliar, ajua técnica -> validar um número
-    
-    SERVICE
-        Decisões, regra do projeto, oq o sitema vai fazer -> aprovar um aluno
+## 🧰 UTILS
 
-📌 Descrição das pastas
+Ferramentas, função auxiliar, ajuda técnica → validar um número
 
-🔹 cmd/
+---
+
+## ⚙️ SERVICE
+
+Decisões, regra do projeto, o que o sistema vai fazer → aprovar um aluno
+
+---
+
+# 📌 Descrição das pastas
+
+## 🔹 cmd/
 
 Contém os pontos de entrada da aplicação.
 
-Cada subpasta representa um executável
-Ideal para projetos com múltiplos apps (API, CLI, etc.)
-
 Exemplo:
 
+```text
 cmd/api/main.go
 cmd/cli/main.go
+```
 
-🔹 internal/
+---
+
+## 🔹 internal/
 
 Código interno da aplicação.
 
 Não pode ser importado por outros projetos
 Usado para proteger a lógica do sistema
 
-🔹 models/
+---
+
+## 🔹 models/
 
 Define as estruturas de dados (structs).
 
 Responsável por:
 
-Representar entidades (User, Product, etc.)
-Mapear dados (JSON, banco, etc.)
+* Representar entidades (User, Product, etc.)
+* Mapear dados (JSON, banco, etc.)
 
 Exemplo:
 
+```go
 type User struct {
     ID    int
     Name  string
     Email string
 }
-🔹 service/
+```
+
+---
+
+## 🔹 service/
 
 Contém as regras de negócio.
 
 Responsável por:
 
-Processamento
-Validações
-Lógica da aplicação
+* Processamento
+* Validações
+* Lógica da aplicação
 
 Exemplo:
 
+```go
 func CreateUser(u models.User) error {
     if u.Email == "" {
         return errors.New("email obrigatório")
     }
     return nil
 }
-🔹 utils/
+```
+
+---
+
+## 🔹 utils/
 
 Funções auxiliares reutilizáveis.
 
 Exemplos:
 
-Formatação
-Validações simples
-Helpers genéricos
+* Formatação
+* Validações simples
+* Helpers genéricos
 
 ⚠️ Evitar colocar regras de negócio aqui.
 
-🔄 Fluxo da aplicação
+---
+
+# 🔄 Fluxo da aplicação
+
 main → service → models → utils
 
-go mod init NAME
+---
 
-    Fazer isso, tu vai criar o go.mod com o nome fornecido no NAME. Se for criar módulos ou serviços para o main
-    Pode usar sites para importar os modules -> example.com/greetings
+# ⚙️ go mod init NAME
 
+Fazer isso cria o go.mod com o nome fornecido no NAME.
+Se for criar módulos ou serviços para o main, pode usar sites para importar modules → example.com/greetings
 
-go mod tidy
+---
 
-    Go vai buscar possiveis packages faltantando e vai resolver dando import no go.mod é como um fix this shit
+# ⚙️ go mod tidy
 
+Go vai buscar possíveis packages faltando e vai resolver, atualizando o go.mod.
+É como um “fix dependencies”.
 
-VAR :=
+---
 
-    Isso faz com que a VAR seja auto declarada pelo Go
-    Só pode ser usada dentro de funções
+# 🧪 VAR :=
 
-    nome := "Golang" // O Go entende que 'nome' é do tipo string
-    idade := 10      // O Go entende que 'idade' é do tipo int
+Isso faz com que a variável seja auto declarada pelo Go.
+Só pode ser usada dentro de funções.
 
-    ou tu escreve assim
+```go
+nome := "Golang" // Go infere string
+idade := 10      // Go infere int
+```
 
-    var nome string = "Golang"
-    var idade int = 10
+ou:
 
-    := declara e atribui (cria uma variável nova).
-    = atribui apenas (atualiza uma variável existente).
+```go
+var nome string = "Golang"
+var idade int = 10
+```
 
+* `:=` declara e atribui (cria variável nova)
+* `=` apenas atualiza variável existente
 
-Diferença entre Println e Sprintln
+---
 
-    Println já mostra logo de cara no console, enquanto o Sprintln tu vai ter que declarar um var recebendo o valor dela
-    e usar o Println para mostrar esse Sprintln
+# 🖨️ Diferença entre Println e Sprintln
 
-    O Sprintln armazena o valor na memória e faz formatação de string
+* `Println` mostra direto no console
+* `Sprintln` armazena a string formatada na memória
 
+---
 
+# 🧾 fmt.Sprintf
+
+```go
 fmt.Sprintf("Hi, %v. Welcome!", VAR)
+```
 
-    Vai printar no console um texto + a variavél declarada após e vírgula.
-    Usar o %v é como usar um := ele vai pegar o tipo da var automaticamente
-    Usar o \n para dar a quebra de linha
+Vai juntar texto + variável.
 
+* `%v` pega o valor automaticamente
+* `\n` quebra linha
 
-    1. Os Mais Usados
+---
 
-        %v: O valor no formato padrão (muito versátil, serve para quase tudo).
+## 1. Os mais usados
 
-        %+v: Quando usado com structs, ele mostra também o nome dos campos.
+* `%v` → valor padrão
+* `%+v` → struct com campos
+* `%T` → tipo
 
-        %T: Mostra o tipo da variável (ex: string, int, main.User).
+---
 
-    2. Strings e Caracteres
+## 2. Strings e caracteres
 
-        %s: Para strings simples.
+* `%s` → string
+* `%q` → string com aspas
+* `%c` → caractere
 
-        %q: Coloca a string entre aspas duplas (útil para debug).
+---
 
-        %c: Para um único caractere (runas).
+## 3. Inteiros
 
-    3. Números Inteiros
+* `%d` → decimal
+* `%b` → binário
+* `%x` → hexadecimal
 
-        %d: Inteiro na base 10 (decimal padrão).
+---
 
-        %b: Representação em binário.
+## 4. Float
 
-        %x: Representação em hexadecimal.
+* `%f` → float
+* `%.2f` → 2 casas decimais
+* `%e` → notação científica
 
-    4. Números Decimais (Float)
+---
 
-        %f: Ponto flutuante padrão (ex: 1.234567).
+## 5. Outros
 
-        %.2f: Ponto flutuante com apenas 2 casas decimais.
+* `%t` → boolean
+* `%p` → ponteiros
 
-        %e: Notação científica.
+---
 
-    5. Outros
+# 📥 import
 
-        %t: Para booleanos (true ou false).
+```go
+import "NOME"
+```
 
-        %p: Para endereços de memória (ponteiros).
-        
+ou:
 
-import
+```go
+import (
+    "NOME1"
+    "NOME2"
+)
+```
 
-    o padrão é usar apenar import "NOME"
-    porém se for usar outras libs, usar com 
-    import(
-        "NOME1"
-        "NOME2"
-    )
+---
 
+# 🎲 return formats[rand.Intn(len(formats))]
 
-return formats[rand.Intn(len(formats))]
+```go
+formats := []string{
+    "Hi, %v. Welcome!",
+    "Great to see you, %v!",
+    "Hail, %v! Well met!",
+}
 
-    formats := []string{
-        "Hi, %v. Welcome!",
-        "Great to see you, %v!",
-        "Hail, %v! Well met!",
-    }
+tamanho := len(formats)
+indiceAleatorio := rand.Intn(tamanho)
+mensagem := formats[indiceAleatorio]
+return mensagem
+```
 
-    tamanho = len(formats)
-    indiceAleatorio := rand.Intn(tamanho)
-    mensagem = formats[indiceAleatorio]
-    return mensagem
+---
 
+# 📦 slice
 
-slice
+```go
+[]int
+[]string
+[]float64
+```
 
-    []Tipo
+É praticamente um array.
 
-    []int
-    []string
-    []float64
+---
 
-    é praticamente um array
+# ⌨️ fmt.Scan
 
+Usado para capturar entrada do usuário.
 
-fmt.Scan
-
-    usar ele pra captar o valor inserido no console
-
-    fmt.Scan(&VAR)
+```go
+fmt.Scan(&VAR)
+```
