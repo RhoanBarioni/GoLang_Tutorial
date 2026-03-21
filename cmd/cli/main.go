@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/RhoanBarioni/GoLang_Tutorial/models"
-	mediaschool "calc"
+	"github.com/RhoanBarioni/GoLang_Tutorial/internal/models"
+	// mediaschool "calc"
 	"fmt"
-	jsonutil "jsonutil"
+	// jsonutil "jsonutil"
 )
 
 type Aluno struct {
