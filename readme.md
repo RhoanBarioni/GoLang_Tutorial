@@ -14,9 +14,16 @@ meu-projeto/
 │   └── app/
 │       └── main.go
 ├── internal/
-│   ├── models/  structs
-│   ├── service/ 
-│   └── utils/ validações e codigo reutilizaveis
+│   ├── models/  structs e classes dentro do sistema
+│   ├── service/ coisas q o sistema faz
+│   └── utils/ validações e codigo reutilizaveis ou ferramentas auxiliar
+
+
+    UTILS
+        Ferramentas, função auxiliar, ajua técnica -> validar um número
+    
+    SERVICE
+        Decisões, regra do projeto, oq o sitema vai fazer -> aprovar um aluno
 
 📌 Descrição das pastas
 

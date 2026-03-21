@@ -1,4 +1,4 @@
-package mediaschool
+package service
 
 import (
 	"fmt"

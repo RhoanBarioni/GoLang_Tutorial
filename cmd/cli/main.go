@@ -1,10 +1,9 @@
 package main
 
 import (
-	"github.com/RhoanBarioni/GoLang_Tutorial/internal/models"
-	// mediaschool "calc"
+	"github.com/RhoanBarioni/GoLang_Tutorial/internal/service"
+	"github.com/RhoanBarioni/GoLang_Tutorial/internal/utils"
 	"fmt"
-	// jsonutil "jsonutil"
 )
 
 type Aluno struct {
@@ -13,7 +12,7 @@ type Aluno struct {
 }
 
 func main() {
-	jsonutil.Json()
+	json.Json()
 
 	var alunos []Aluno
 	var nota float64
