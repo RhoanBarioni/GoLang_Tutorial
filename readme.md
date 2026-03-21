@@ -1,3 +1,93 @@
+Estrutura de Projeto em Go
+
+Conceitos principais
+Package (pacote): cada pasta é um pacote
+main.go: ponto de entrada da aplicação
+go.mod: define o módulo do projeto
+Separação de responsabilidades: cada parte do código tem um papel claro
+
+🗂️ Estrutura recomendada
+
+meu-projeto/
+├── go.mod
+├── cmd/
+│   └── app/
+│       └── main.go
+├── internal/
+│   ├── models/  structs
+│   ├── service/ 
+│   └── utils/ validações e codigo reutilizaveis
+
+📌 Descrição das pastas
+
+🔹 cmd/
+
+Contém os pontos de entrada da aplicação.
+
+Cada subpasta representa um executável
+Ideal para projetos com múltiplos apps (API, CLI, etc.)
+
+Exemplo:
+
+cmd/api/main.go
+cmd/cli/main.go
+
+🔹 internal/
+
+Código interno da aplicação.
+
+Não pode ser importado por outros projetos
+Usado para proteger a lógica do sistema
+
+🔹 models/
+
+Define as estruturas de dados (structs).
+
+Responsável por:
+
+Representar entidades (User, Product, etc.)
+Mapear dados (JSON, banco, etc.)
+
+Exemplo:
+
+type User struct {
+    ID    int
+    Name  string
+    Email string
+}
+🔹 service/
+
+Contém as regras de negócio.
+
+Responsável por:
+
+Processamento
+Validações
+Lógica da aplicação
+
+Exemplo:
+
+func CreateUser(u models.User) error {
+    if u.Email == "" {
+        return errors.New("email obrigatório")
+    }
+    return nil
+}
+🔹 utils/
+
+Funções auxiliares reutilizáveis.
+
+Exemplos:
+
+Formatação
+Validações simples
+Helpers genéricos
+
+⚠️ Evitar colocar regras de negócio aqui.
+
+🔄 Fluxo da aplicação
+main → service → models → utils
+
 go mod init NAME
 
     Fazer isso, tu vai criar o go.mod com o nome fornecido no NAME. Se for criar módulos ou serviços para o main
