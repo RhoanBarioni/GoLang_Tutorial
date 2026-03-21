@@ -18,5 +18,6 @@ func Calc(nome string, notas []float64) (float64) {
 	} else{
 		fmt.Printf("Não tem jeito %v repetiu \n", nome)
 	}
+	fmt.Printf("Nota Final: %.2f\n", mediaNota)
 	return mediaNota
 }
