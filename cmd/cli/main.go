@@ -1,9 +1,12 @@
 package main
 
 import (
-	"github.com/RhoanBarioni/GoLang_Tutorial/internal/service"
-	"github.com/RhoanBarioni/GoLang_Tutorial/internal/jsonutil"
+	"encoding/json"
 	"fmt"
+	"os"
+
+	"github.com/RhoanBarioni/GoLang_Tutorial/internal/jsonutil"
+	"github.com/RhoanBarioni/GoLang_Tutorial/internal/service"
 )
 
 type Aluno struct {
@@ -14,20 +17,25 @@ type Aluno struct {
 func main() {
 	jsonutil.Json()
 
+	// Realiza a leitura arquivo
+	// Faz um "Unmarshal" para a struct "Aluno"
+
 	var alunos []Aluno
 	var nota float64
-	// var notas []float64
-	// var soma float64
-	// var nome string
-
-	// pegar o aluno e notas e jogar num arr
-	// ay
 
 	for {
 		var aluno Aluno
+		var nomeAluno string
 
 		fmt.Print("Digite o nome do Aluno: ")
-		fmt.Scan(&aluno.Nome)
+		fmt.Scan(&nomeAluno)
+
+		//Verificar se esse aluno já está presente no slice de Alunos
+
+		// Se sim, você deve atualizar as notas desse aluno
+		// Se não, você deve criar um novo aluno
+
+		//Obs: Utilizar a variável "aluno" para armazenar o nome e as notas.
 
 		for {
 			fmt.Println("Para encerrar a adição das notas, colocar '-1'")
@@ -39,12 +47,13 @@ func main() {
 			}
 
 			aluno.Notas = append(aluno.Notas, nota)
-			// soma += nota
 
+			// aluno.Notas = notas (novo slice aqui)
 		}
 
 		alunos = append(alunos, aluno)
-		fmt.Print(alunos)
+
+		fmt.Println(alunos)
 
 		fmt.Print("Há mais alunos para serem inseridos? (s/n)")
 		var response string
@@ -59,15 +68,10 @@ func main() {
 		fmt.Println(alunos[i])
 		service.Calc(alunos[i].Nome, alunos[i].Notas)
 	}
-	// for i := 0; i < len(alunos); i++{
-	// 	fmt.Println(alunos[i].Notas)
 
-	// 	var soma float64
-	// 	for v := 0; v < len(alunos[i].Notas); v++{
-	// 		// fmt.Println(alunos[i].Notas[v])
-	// 		soma += alunos[i].Notas[v]
-	// 	}
-	// 	fmt.Println("AQ A CONTA PORRA")
-	// 	fmt.Println(soma)
-	// }
+	novoJson, _ := json.Marshal(alunos)
+	fmt.Println(string(novoJson))
+	enderecoJson := "data/dados.json"
+	os.WriteFile(enderecoJson, novoJson, 0644)
+	jsonutil.Json()
 }
