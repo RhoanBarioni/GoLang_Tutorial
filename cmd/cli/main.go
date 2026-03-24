@@ -9,33 +9,30 @@ import (
 	"github.com/RhoanBarioni/GoLang_Tutorial/internal/service"
 )
 
-type Aluno struct {
-	Nome  string
-	Notas []float64
-}
-
 func main() {
-	jsonutil.Json()
+	alunos, err := jsonutil.Json()
 
-	// Realiza a leitura arquivo
-	// Faz um "Unmarshal" para a struct "Aluno"
+	if err != nil {
+		fmt.Println("Erro ao ler o alunos:", err)
+		return
+	}
 
-	var alunos []Aluno
 	var nota float64
 
 	for {
-		var aluno Aluno
-		var nomeAluno string
+		var aluno jsonutil.Aluno
+		var index int = -1
 
 		fmt.Print("Digite o nome do Aluno: ")
-		fmt.Scan(&nomeAluno)
+		fmt.Scan(&aluno.Nome)
 
-		//Verificar se esse aluno já está presente no slice de Alunos
-
-		// Se sim, você deve atualizar as notas desse aluno
-		// Se não, você deve criar um novo aluno
-
-		//Obs: Utilizar a variável "aluno" para armazenar o nome e as notas.
+		for idx, a := range alunos {
+			if a.Nome == aluno.Nome {
+				aluno = a // Atribuir o aluno encontrado à variável "aluno"
+				index = idx
+				break
+			}
+		}
 
 		for {
 			fmt.Println("Para encerrar a adição das notas, colocar '-1'")
@@ -47,11 +44,14 @@ func main() {
 			}
 
 			aluno.Notas = append(aluno.Notas, nota)
-
-			// aluno.Notas = notas (novo slice aqui)
 		}
 
-		alunos = append(alunos, aluno)
+		// verificar se ja existe e evitar dele duplicar no final
+		if index != -1 {
+			alunos[index] = aluno // Atualizar o aluno existente na lista
+		} else {
+			alunos = append(alunos, aluno)
+		}
 
 		fmt.Println(alunos)
 
@@ -71,7 +71,6 @@ func main() {
 
 	novoJson, _ := json.Marshal(alunos)
 	fmt.Println(string(novoJson))
-	enderecoJson := "data/dados.json"
+	enderecoJson := "../../data/dados.json"
 	os.WriteFile(enderecoJson, novoJson, 0644)
-	jsonutil.Json()
 }
