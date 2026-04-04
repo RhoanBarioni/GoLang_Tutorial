@@ -65,7 +65,10 @@ func main() {
 	}
 
 	for {
-		fmt.Println("Deseja deletar algum aluno?")
+		fmt.Println("Deseja deletar algum aluno? n para encerrar e digite o nome para deletar")
+		for _, nomes := range alunos{
+			fmt.Println(nomes.Nome)
+		}
 		var alunoNome string
 		fmt.Scan(&alunoNome)
 
@@ -80,7 +83,7 @@ func main() {
 			}
 		}
 
-		fmt.Println("Deseja deletar outro aluno?")
+		fmt.Println("Deseja deletar outro aluno? s/n")
 		var response string
 		fmt.Scan(&response)
 		if response != "s" {
