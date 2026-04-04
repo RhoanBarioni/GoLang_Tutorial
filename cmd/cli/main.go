@@ -64,6 +64,30 @@ func main() {
 		}
 	}
 
+	for {
+		fmt.Println("Deseja deletar algum aluno?")
+		var alunoNome string
+		fmt.Scan(&alunoNome)
+
+		if alunoNome == "n" {
+			break
+		}
+
+		for i, a := range alunos {
+			if a.Nome == alunoNome {
+				alunos = append(alunos[:i], alunos[i+1:]...)
+				break
+			}
+		}
+
+		fmt.Println("Deseja deletar outro aluno?")
+		var response string
+		fmt.Scan(&response)
+		if response != "s" {
+			break
+		}
+	}
+
 	for i := 0; i < len(alunos); i++ {
 		fmt.Println(alunos[i])
 		service.Calc(alunos[i].Nome, alunos[i].Notas)
