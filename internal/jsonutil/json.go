@@ -8,8 +8,10 @@ import (
 )
 
 type Aluno struct {
-	Nome  string    `json:"nome"`
-	Notas []float64 `json:"nota"`
+	Id    int
+	Nome  string
+	Media float64
+	Notas []float64
 }
 
 func Json() ([]Aluno, error) {
@@ -33,7 +35,7 @@ func Json() ([]Aluno, error) {
 		return nil, err
 	}
 
-	var alunos []Aluno                        // criar var para que ele receba todo o json em forma de array
+	var alunos []Aluno                       // criar var para que ele receba todo o json em forma de array
 	err = json.Unmarshal(byteValue, &alunos) // faz o err pegar a função pq a função vai sempre tentar retornar um erro, então fica mais fácil e clean deixar assim
 	// fmt.Println(student)
 

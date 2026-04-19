@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/RhoanBarioni/GoLang_Tutorial/internal/jsonutil"
@@ -10,12 +11,33 @@ import (
 )
 
 func main() {
-	alunos, err := jsonutil.Json()
+	// alunos, err := jsonutil.Json()
+
+	// if err != nil {
+	// 	fmt.Println("Erro ao ler o alunos:", err)
+	// 	return
+	// }
+
+	db, err := service.DbNew()
 
 	if err != nil {
-		fmt.Println("Erro ao ler o alunos:", err)
-		return
+		panic(err)
 	}
+
+	alunos, err := service.GetAlunos(db)
+	log.Print(alunos)
+
+	aluno, err := service.GetAlunoById(db, 1)
+
+	novoAluno := &jsonutil.Aluno{
+        Nome:  "Pedro Silva",
+        Media: 8.5,
+    }
+
+	service.CreateAluno(db, novoAluno)
+
+	log.Print(aluno)
+
 
 	var nota float64
 
@@ -66,7 +88,7 @@ func main() {
 
 	for {
 		fmt.Println("Deseja deletar algum aluno? n para encerrar e digite o nome para deletar")
-		for _, nomes := range alunos{
+		for _, nomes := range alunos {
 			fmt.Println(nomes.Nome)
 		}
 		var alunoNome string
