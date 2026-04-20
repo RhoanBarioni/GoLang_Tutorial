@@ -29,12 +29,22 @@ func main() {
 
 	aluno, err := service.GetAlunoById(db, 1)
 
-	novoAluno := &jsonutil.Aluno{
-        Nome:  "Pedro Silva",
-        Media: 8.5,
-    }
+	// novoAluno := &jsonutil.Aluno{
+    //     Nome:  "Pedro Silva",
+    //     Media: 8.5,
+    // }
 
-	service.CreateAluno(db, novoAluno)
+	// service.CreateAluno(db, novoAluno)
+
+	// novoAluno1 := &jsonutil.Aluno{
+	// 	Id: 7,
+    //     Nome:  "michael",
+    //     Media: 45,
+    // }
+
+	// service.UpdateAluno(db, novoAluno1)
+
+	service.DeleteAluno(db, 7)
 
 	log.Print(aluno)
 

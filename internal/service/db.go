@@ -84,20 +84,33 @@ func GetAlunoById(db *sql.DB, id int) (jsonutil.Aluno, error) {
 // A gente faz retornar error pq nós não iremos precisar da informação de alunos no main, só queremos saber se tudo ocorreu bem, por isso tem o err
 
 func CreateAluno(db *sql.DB, aluno *jsonutil.Aluno) error {
+	// nao preciso saber do db pq n quero q ele pingue o resultado lá fora, so quero saber se tem erro
 	_, err := db.Exec("insert into alunos (nome, media) values (?, ?)", aluno.Nome, aluno.Media)
 	fmt.Println("Usuario inserido com sucesso")
 
-	if err != nil{
+	if err != nil {
 		return err
 	}
 
 	return nil
 }
 
-// func UpdateAluno(db *sql.DB, aluno jsonutil.Aluno) error {
-// 	//
-// }
+func UpdateAluno(db *sql.DB, aluno *jsonutil.Aluno) error {
+	_, err := db.Exec("update alunos set nome = ?, media = ? where id = ?", aluno.Nome, aluno.Media, aluno.Id)
 
-// func DeleteAluno(db *sql.DB, id int) error {
-// 	//
-// }
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func DeleteAluno(db *sql.DB, id int) error {
+	_, err := db.Exec("delete from alunos where id = ?", id)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
