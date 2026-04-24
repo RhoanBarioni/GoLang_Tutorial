@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/RhoanBarioni/GoLang_Tutorial/internal/jsonutil"
 	"github.com/RhoanBarioni/GoLang_Tutorial/internal/service"
 )
 
@@ -21,41 +22,41 @@ func main() {
 		panic(err)
 	}
 
-	// var nota float64
+	var nota float64
 
-	// for {
-	// 	var aluno jsonutil.Aluno
+	for {
+		var aluno jsonutil.Aluno
 
-	// 	fmt.Print("Digite o nome do Aluno: ")
-	// 	fmt.Scan(&aluno.Nome)
+		fmt.Print("Digite o nome do Aluno: ")
+		fmt.Scan(&aluno.Nome)
 
-	// 	for {
-	// 		fmt.Println("Para encerrar a adição das notas, colocar '-1'")
-	// 		fmt.Print("Nota: ")
-	// 		fmt.Scan(&nota)
+		for {
+			fmt.Println("Para encerrar a adição das notas, colocar '-1'")
+			fmt.Print("Nota: ")
+			fmt.Scan(&nota)
 
-	// 		if nota == -1 {
-	// 			break
-	// 		}
+			if nota == -1 {
+				break
+			}
 
-	// 		aluno.Notas = append(aluno.Notas, nota)
-	// 	}
+			aluno.Notas = append(aluno.Notas, nota)
+		}
 
-	// 	// SalvarAluno
-	// 	err = service.SalvarAluno(db, &aluno)
-	// 	if err != nil {
-	// 		fmt.Println("Erro ao salvar no banco de dados")
-	// 		panic(err)
-	// 	}
+		// SalvarAluno
+		err = service.SalvarAluno(db, &aluno)
+		if err != nil {
+			fmt.Println("Erro ao salvar no banco de dados")
+			panic(err)
+		}
 
-	// 	fmt.Print("Há mais alunos para serem inseridos? (s/n)")
-	// 	var response string
-	// 	fmt.Scan(&response)
+		fmt.Print("Há mais alunos para serem inseridos? (s/n)")
+		var response string
+		fmt.Scan(&response)
 
-	// 	if response != "s" {
-	// 		break
-	// 	}
-	// }
+		if response != "s" {
+			break
+		}
+	}
 
 	//
 	fmt.Println(service.GetAlunos(db))
@@ -69,8 +70,6 @@ func main() {
 	}
 
 	log.Println(todosAlunos)
-
-
 
 	for {
 		fmt.Println("Deseja deletar algum aluno? n para encerrar e digite o nome para deletar")
