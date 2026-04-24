@@ -3,6 +3,7 @@ package service
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
 	"github.com/RhoanBarioni/GoLang_Tutorial/internal/jsonutil"
 	_ "github.com/go-sql-driver/mysql"
@@ -65,16 +66,16 @@ func GetAlunos(db *sql.DB) ([]jsonutil.Aluno, error) {
 	return alunos, nil
 }
 
-func GetAlunoById(db *sql.DB, id int) (jsonutil.Aluno, error) {
+func GetAlunoByName(db *sql.DB, name string) (jsonutil.Aluno, error) {
 	aluno := jsonutil.Aluno{}
 
-	err := db.QueryRow("select * from alunos where id = ?", id).Scan(
+	err := db.QueryRow("select * from alunos where nome = ?", name).Scan(
 		&aluno.Id,
 		&aluno.Nome,
 		&aluno.Media,
 	)
 
-	if err != nil {
+	if err != sql.ErrNoRows {
 		return aluno, err
 	}
 
@@ -96,7 +97,7 @@ func CreateAluno(db *sql.DB, aluno *jsonutil.Aluno) error {
 }
 
 func UpdateAluno(db *sql.DB, aluno *jsonutil.Aluno) error {
-	_, err := db.Exec("update alunos set nome = ?, media = ? where id = ?", aluno.Nome, aluno.Media, aluno.Id)
+	_, err := db.Exec("update alunos set nome = ?, media = ? where nome = ?", aluno.Nome, aluno.Media, aluno.Nome)
 
 	if err != nil {
 		return err
@@ -105,11 +106,39 @@ func UpdateAluno(db *sql.DB, aluno *jsonutil.Aluno) error {
 	return nil
 }
 
-func DeleteAluno(db *sql.DB, id int) error {
-	_, err := db.Exec("delete from alunos where id = ?", id)
+func DeleteAluno(db *sql.DB, nome string) error {
+	_, err := db.Exec("delete from alunos where nome = ?", nome)
 
 	if err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func SalvarAluno(db *sql.DB, aluno *jsonutil.Aluno) error {
+	res, err := GetAlunoByName(db, aluno.Nome)
+	if err != nil {
+		return err
+	}
+
+	aluno.Media = Calc(aluno.Nome, aluno.Notas)
+
+	fmt.Println(aluno.Media)
+	fmt.Println(aluno)
+
+	if res.Nome != aluno.Nome {
+		err = CreateAluno(db, aluno)
+		if err != nil {
+			return err
+		}
+	} else {
+		log.Println(aluno.Media)
+		err = UpdateAluno(db, aluno)
+		log.Println(aluno.Media)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

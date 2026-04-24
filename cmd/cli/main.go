@@ -1,12 +1,9 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
-	"os"
 
-	"github.com/RhoanBarioni/GoLang_Tutorial/internal/jsonutil"
 	"github.com/RhoanBarioni/GoLang_Tutorial/internal/service"
 )
 
@@ -24,81 +21,61 @@ func main() {
 		panic(err)
 	}
 
-	alunos, err := service.GetAlunos(db)
-	log.Print(alunos)
+	// var nota float64
 
-	aluno, err := service.GetAlunoById(db, 1)
+	// for {
+	// 	var aluno jsonutil.Aluno
 
-	// novoAluno := &jsonutil.Aluno{
-    //     Nome:  "Pedro Silva",
-    //     Media: 8.5,
-    // }
+	// 	fmt.Print("Digite o nome do Aluno: ")
+	// 	fmt.Scan(&aluno.Nome)
 
-	// service.CreateAluno(db, novoAluno)
+	// 	for {
+	// 		fmt.Println("Para encerrar a adição das notas, colocar '-1'")
+	// 		fmt.Print("Nota: ")
+	// 		fmt.Scan(&nota)
 
-	// novoAluno1 := &jsonutil.Aluno{
-	// 	Id: 7,
-    //     Nome:  "michael",
-    //     Media: 45,
-    // }
+	// 		if nota == -1 {
+	// 			break
+	// 		}
 
-	// service.UpdateAluno(db, novoAluno1)
+	// 		aluno.Notas = append(aluno.Notas, nota)
+	// 	}
 
-	service.DeleteAluno(db, 7)
+	// 	// SalvarAluno
+	// 	err = service.SalvarAluno(db, &aluno)
+	// 	if err != nil {
+	// 		fmt.Println("Erro ao salvar no banco de dados")
+	// 		panic(err)
+	// 	}
 
-	log.Print(aluno)
+	// 	fmt.Print("Há mais alunos para serem inseridos? (s/n)")
+	// 	var response string
+	// 	fmt.Scan(&response)
 
+	// 	if response != "s" {
+	// 		break
+	// 	}
+	// }
 
-	var nota float64
+	//
+	fmt.Println(service.GetAlunos(db))
 
-	for {
-		var aluno jsonutil.Aluno
-		var index int = -1
+	fmt.Println("Deseja deletar algum aluno? n para encerrar e digite o nome para deletar")
 
-		fmt.Print("Digite o nome do Aluno: ")
-		fmt.Scan(&aluno.Nome)
+	todosAlunos, err := service.GetAlunos(db)
 
-		for idx, a := range alunos {
-			if a.Nome == aluno.Nome {
-				aluno = a // Atribuir o aluno encontrado à variável "aluno"
-				index = idx
-				break
-			}
-		}
-
-		for {
-			fmt.Println("Para encerrar a adição das notas, colocar '-1'")
-			fmt.Print("Nota: ")
-			fmt.Scan(&nota)
-
-			if nota == -1 {
-				break
-			}
-
-			aluno.Notas = append(aluno.Notas, nota)
-		}
-
-		// verificar se ja existe e evitar dele duplicar no final
-		if index != -1 {
-			alunos[index] = aluno // Atualizar o aluno existente na lista
-		} else {
-			alunos = append(alunos, aluno)
-		}
-
-		fmt.Println(alunos)
-
-		fmt.Print("Há mais alunos para serem inseridos? (s/n)")
-		var response string
-		fmt.Scan(&response)
-
-		if response != "s" {
-			break
-		}
+	if err != nil {
+		log.Println(err)
 	}
+
+	log.Println(todosAlunos)
+
+
 
 	for {
 		fmt.Println("Deseja deletar algum aluno? n para encerrar e digite o nome para deletar")
-		for _, nomes := range alunos {
+
+		for _, nomes := range todosAlunos {
 			fmt.Println(nomes.Nome)
 		}
 		var alunoNome string
@@ -108,12 +85,14 @@ func main() {
 			break
 		}
 
-		for i, a := range alunos {
-			if a.Nome == alunoNome {
-				alunos = append(alunos[:i], alunos[i+1:]...)
-				break
-			}
-		}
+		service.DeleteAluno(db, alunoNome)
+
+		// for i, a := range todosAlunos {
+		// 	if a.Nome == alunoNome {
+		// 		alunos = append(alunos[:i], alunos[i+1:]...)
+		// 		break
+		// 	}
+		// }
 
 		fmt.Println("Deseja deletar outro aluno? s/n")
 		var response string
@@ -123,13 +102,8 @@ func main() {
 		}
 	}
 
-	for i := 0; i < len(alunos); i++ {
-		fmt.Println(alunos[i])
-		service.Calc(alunos[i].Nome, alunos[i].Notas)
-	}
-
-	novoJson, _ := json.Marshal(alunos)
-	fmt.Println(string(novoJson))
-	enderecoJson := "../../data/dados.json"
-	os.WriteFile(enderecoJson, novoJson, 0644)
+	// novoJson, _ := json.Marshal(alunos)
+	// fmt.Println(string(novoJson))
+	// enderecoJson := "../../data/dados.json"
+	// os.WriteFile(enderecoJson, novoJson, 0644)
 }
